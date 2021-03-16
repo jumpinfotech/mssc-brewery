@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * Created by jt on 2019-04-23.
  */
-@RequestMapping("/api/v2/beer")
+@RequestMapping("/api/v2/beer") // no set API versioning standard JT uses this approach!!
 @RestController
 public class BeerControllerV2 {
     private final BeerServiceV2 beerServiceV2;

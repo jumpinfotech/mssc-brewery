@@ -14,9 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDtoV2 {
+public class BeerDtoV2 { // JT puts V2 on class name - avoids intellisense mistakes
     private UUID id;
     private String beerName;
-    private BeerStyleEnum beerStyle;
+    private BeerStyleEnum beerStyle; // type change on beerStyle = breaking change
     private Long upc;
 }
