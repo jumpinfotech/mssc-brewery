@@ -9,4 +9,10 @@ import java.util.UUID;
  */
 public interface CustomerService { // alt+enter>Implement interface>remember to add org.springframework.stereotype.Service;
     CustomerDto getCustomerById(UUID customerId);
+
+    CustomerDto saveNewCustomer(CustomerDto customerDto);
+
+    void updateCustomer(UUID customerId, CustomerDto customerDto);
+
+    void deleteById(UUID customerId);
 }
