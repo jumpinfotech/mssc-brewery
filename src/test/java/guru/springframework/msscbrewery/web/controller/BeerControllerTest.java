@@ -78,7 +78,7 @@ public class BeerControllerTest {
     public void handleUpdate() throws Exception {
         //given
         BeerDto beerDto = validBeer;
-        beerDto.setId(null);
+        beerDto.setId(null); // needed as field now has annotation @Null>you can't set the id, otherwise 400 returned
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
         //when

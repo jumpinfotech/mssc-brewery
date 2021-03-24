@@ -13,22 +13,26 @@ import java.util.List;
 /**
  * Created by jt on 2019-05-25.
  */
-@ControllerAdvice
+@ControllerAdvice // advises Spring MVC this is an exception handler, it's applied globally - added to all controllers, removes duplication in controllers
 public class MvcExceptionHandler {
 
-    @ExceptionHandler(ConstraintViolationException.class)
+    // controller>@Valid fails>throws ConstraintViolationException
+    @ExceptionHandler(ConstraintViolationException.class) // handles standard exception from javax.validation api
     public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e){
+        // a simple list of strings, you could send back a nice response body
         List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
 
-        e.getConstraintViolations().forEach(constraintViolation -> {
+        e.getConstraintViolations().forEach(constraintViolation -> { // many ways to do this
             errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
         });
-
+        // return info in body of response
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    // BindException could be thrown when Spring tries binding the @RequestBody to BeerDto 
     @ExceptionHandler(BindException.class)
     public ResponseEntity<List> handleBindException(BindException ex){
+        // ex.getAllErrors()>returns list of errors>an object gets converted to JSON
         return new ResponseEntity(ex.getAllErrors(), HttpStatus.BAD_REQUEST);
     }
 }

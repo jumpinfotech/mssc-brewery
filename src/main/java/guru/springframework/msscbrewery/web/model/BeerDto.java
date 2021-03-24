@@ -19,10 +19,13 @@ import java.util.UUID;
 @Builder
 public class BeerDto {
 
-    @Null
+    @Null // client cannot set id
     private UUID id;
 
-    @NotBlank
+    @NotBlank // @NotBlank clicking on this, then philips head in Project window>it's from:- 
+    // javax.validation:validation-api:2.0.1.Final>constraints is official bean validation api
+    // Look at:-
+    // org.hibernate.validator:hibernatae-validator:6.0.16.Final>constraints - hibernate extends the api
     private String beerName;
 
     @NotBlank

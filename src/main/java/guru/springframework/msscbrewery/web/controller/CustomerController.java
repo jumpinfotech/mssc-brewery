@@ -41,7 +41,8 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+    // @Valid>throw ConstraintViolationException if CustomerDto bean validation failure, don't forget @RequestBody!!
     public void handleUpdate(@PathVariable("customerId") UUID customerId, @Valid @RequestBody CustomerDto customerDto){
         customerService.updateCustomer(customerId, customerDto);
     }

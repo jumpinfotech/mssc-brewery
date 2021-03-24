@@ -13,6 +13,9 @@ import java.util.UUID;
 /**
  * Created by jt on 2019-04-23.
  */
+// @Validated 
+// method validations, not used much>JT not checked in>mostly we see annotations on POJO (here BeerDtoV2)
+// then add @NotNull in method e.g. handlePost(@Valid @NotNull @RequestBody BeerDtoV2 beerDto)
 @RequestMapping("/api/v2/beer")
 @RestController
 public class BeerControllerV2 {

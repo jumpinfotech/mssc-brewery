@@ -28,6 +28,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+<!-- <artifactId>spring-boot-starter-validation</artifactId> important spring-boot 2.3+ needs this validation brought in -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

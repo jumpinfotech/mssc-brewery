@@ -31,6 +31,7 @@ public class BeerController {
     }
 
     @PostMapping // POST - create new beer
+// @Valid triggers the validation set in BeerDto - @Valid @RequestBody - order doesn't matter, @RequestBody @Valid is also OK    
     public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto){
 
         BeerDto savedDto = beerService.saveNewBeer(beerDto);
