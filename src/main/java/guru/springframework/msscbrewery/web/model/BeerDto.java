@@ -15,11 +15,14 @@ import java.util.UUID;
  * Created by jt on 2019-04-20.
  */
 @Data
-@NoArgsConstructor
+@NoArgsConstructor 
+// ..\m2\repository\org\projectlombok\lombok\1.18.18\lombok-1.18.18.jar!\lombok\NoArgsConstructor.class
 @AllArgsConstructor
 @Builder
 public class BeerDto {
-
+// Lombok enhances the class with annotation processing:-
+// mssc-brewery\target\classes\guru\springframework\msscbrewery\web\model\BeerDto.class
+    
     @Null
     private UUID id;
 

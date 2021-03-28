@@ -18,6 +18,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
+<!--		overriding lombok version that's inherited from the Spring Boot parent pom-->
 		<org.lombok.version>1.18.18</org.lombok.version>
 	</properties>
 
@@ -36,15 +37,23 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+<!-- 	lombok is in parent project of Spring Boot>was picking up the version there. 
+		Maven tool>mssc-brewery>Dependencies we have org.projectlombok:lombok:1.18.18, if you update the 
+		spring-boot-starter-parent version>click maven tool reload (refresh top left)>lombok version may update.
+		IntelliJ config:- Preferences>Build, Execution, Deployment>Compiler>Annotation Processors>
+		select both: 1) Enable annotation processing 2) Obtain processors from project classpath
+		-->
+		<dependency> 
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+<!--		<version>${lombok.version}</version> would take the version from the spring boot parent pom -->
 			<version>${org.lombok.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
+<!--		mapstruct version declared above>it's not found in Spring Boot parent pom -->
 			<version>${mapstruct.version}</version>
 		</dependency>
 		<dependency>
@@ -60,11 +69,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<!--		mapstruct + lombok alone works fine>combined they need additional configuration-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
+<!--				lombok + mapstruct need annotation processors -->
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>
@@ -83,6 +94,8 @@
 						</path>
 					</annotationProcessorPaths>
 					<compilerArgs>
+<!--				instructs MapStruct when generating classes to annotate them with @Component, 
+					run maven clean then package to verify things work  -->
 						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
 					</compilerArgs>
 				</configuration>

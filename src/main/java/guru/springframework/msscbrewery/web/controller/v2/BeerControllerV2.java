@@ -16,12 +16,17 @@ import java.util.UUID;
 /**
  * Created by jt on 2019-04-23.
  */
-@Slf4j
+@Slf4j // create logger
 @RequiredArgsConstructor
 @RequestMapping("/api/v2/beer")
 @RestController
 public class BeerControllerV2 {
     private final BeerServiceV2 beerServiceV2;
+
+    // using @RequiredArgsConstructor, therefore no longer needed:- 
+    // public BeerControllerV2(BeerServiceV2 beerServiceV2) {
+    //     this.beerServiceV2 = beerServiceV2;
+    // }
 
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId){
@@ -32,8 +37,15 @@ public class BeerControllerV2 {
     @PostMapping // POST - create new beer
     public ResponseEntity handlePost(@Valid @RequestBody BeerDtoV2 beerDto){
 
-        log.debug("in handle post...");
+        log.debug("in handle post..."); // @Slf4j makes this possible
+        //maven>clean>compile>inspect generated classes in target:-
+        // ..\target\classes\guru\springframework\msscbrewery\web\controller\v2\BeerControllerV2.class
+        // we see:-
+        // ... Logger log = ... (@Slf4j), 
+        // args constructor (@RequiredArgsConstructor), 
+        // proper types (var + val)
 
+        // type BeerDtoV2 replaced with lombok.val>similar to Kotlin
         val savedDto = beerServiceV2.saveNewBeer(beerDto);
 
         var headers = new HttpHeaders();

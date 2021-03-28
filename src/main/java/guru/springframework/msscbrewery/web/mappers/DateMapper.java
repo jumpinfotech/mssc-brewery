@@ -9,7 +9,9 @@ import java.time.ZoneOffset;
 /**
  * Created by jt on 2019-05-25.
  */
-@Component
+@Component // important!!>a Spring bean, added @Mapper(uses = {DateMapper.class}) to BeerMapper, 
+// in BeerMapperImpl we have:-
+// @Autowired private DateMapper dateMapper;>MapStruct uses reflection to use both methods below.
 public class DateMapper {
     public OffsetDateTime asOffsetDateTime(Timestamp ts){
         if (ts != null){
